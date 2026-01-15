@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bush Bunny | Authentic Safaris & Professional Research Services</title>
+    <meta name="description" content="Bush Bunny: Premier authentic safaris and professional research, translation, and data collection services in East Africa.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bush: {
+                            gold: '#D4A373',
+                            green: '#2C5F2D',
+                            dark: '#1C1917',
+                            light: '#FAFAF9',
+                            slate: '#4A5568',
+                            accent: '#C68E17'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Work Sans', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-color: #1C1917;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=2068');
+            background-size: cover;
+            background-position: center;
+        }
+        .service-pattern {
+            background-image: radial-gradient(#D4A373 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Hide scrollbar for gallery but keep functionality */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-bush-light text-bush-dark font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="router.navigate('home')">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="footprints" class="text-bush-green w-8 h-8"></i>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-2xl tracking-tight text-bush-green leading-none">Bush Bunny</span>
+                            <span class="text-[10px] uppercase tracking-widest text-bush-gold font-semibold">East Africa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" onclick="router.navigate('safaris')" class="text-stone-600 hover:text-bush-green font-medium transition">Safaris</a>
+                    <a href="#" onclick="router.navigate('services')" class="text-stone-600 hover:text-bush-green font-medium transition">Research & Data</a>
+                    <a href="#" onclick="router.navigate('about')" class="text-stone-600 hover:text-bush-green font-medium transition">About</a>
+                    <a href="#" onclick="router.navigate('blog')" class="text-stone-600 hover:text-bush-green font-medium transition">Insights</a>
+                    <a href="#" onclick="router.navigate('contact')" class="bg-bush-green text-white px-5 py-2.5 rounded-md font-medium hover:bg-green-800 transition shadow-sm">Get a Quote</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-stone-600 hover:text-bush-green focus:outline-none p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#" onclick="mobileNav('safaris')" class="block px-3 py-3 text-base font-medium text-stone-700 hover:bg-stone-50 rounded-md">Safaris</a>
+                <a href="#" onclick="mobileNav('services')" class="block px-3 py-3 text-base font-medium text-stone-700 hover:bg-stone-50 rounded-md">Research Services</a>
+                <a href="#" onclick="mobileNav('about')" class="block px-3 py-3 text-base font-medium text-stone-700 hover:bg-stone-50 rounded-md">About Us</a>
+                <a href="#" onclick="mobileNav('blog')" class="block px-3 py-3 text-base font-medium text-stone-700 hover:bg-stone-50 rounded-md">Blog</a>
+                <a href="#" onclick="mobileNav('contact')" class="block px-3 py-3 text-base font-medium text-bush-green bg-green-50 rounded-md">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="app-container" class="pt-20 min-h-screen">
+        <!-- Views will be injected/toggled here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-bush-dark text-stone-300 py-12 border-t-4 border-bush-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="footprints" class="text-bush-gold w-6 h-6"></i>
+                        <span class="font-serif font-bold text-xl text-white">Bush Bunny</span>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-4">Authentic safaris and professional research support services across East Africa. Bridging the gap between adventure and insight.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-serif font-bold mb-4">Safaris</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="router.navigate('safaris')" class="hover:text-bush-gold transition">Living Mara</a></li>
+                        <li><a href="#" onclick="router.navigate('safaris')" class="hover:text-bush-gold transition">Rift Valley</a></li>
+                        <li><a href="#" onclick="router.navigate('safaris')" class="hover:text-bush-gold transition">Custom Itineraries</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-serif font-bold mb-4">Services</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="router.navigate('services')" class="hover:text-bush-gold transition">Translation</a></li>
+                        <li><a href="#" onclick="router.navigate('services')" class="hover:text-bush-gold transition">Data Collection</a></li>
+                        <li><a href="#" onclick="router.navigate('services')" class="hover:text-bush-gold transition">Localisation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-serif font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> hello@bushbunny.com</li>
+                        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> +254 724 295 128</li>
+                        <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Nairobi, Kenya</li>
+                    </ul>
+                    <div class="flex gap-4 mt-4">
+                        <a href="#" class="text-stone-400 hover:text-white"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="text-stone-400 hover:text-white"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="text-stone-400 hover:text-white"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-stone-800 mt-12 pt-8 text-center text-xs text-stone-500 flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2026 Bush Bunny. All rights reserved.</p>
+                <div class="space-x-4 mt-2 md:mt-0">
+                    <a href="#" class="hover:text-stone-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-stone-300">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Sticky Button -->
+    <a href="https://wa.me/254724295128" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-transform hover:scale-110 z-50 flex items-center justify-center group" aria-label="Chat on WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+        <span class="absolute right-full mr-3 bg-white text-stone-800 px-3 py-1 rounded shadow-md text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block">Chat with us</span>
+    </a>
+
+    <!-- TEMPLATES FOR VIEWS (Managed by JS) -->
+    
+    <!-- 1. HOME VIEW -->
+    <template id="view-home">
+        <!-- Hero -->
+        <section class="hero-pattern relative h-[85vh] flex items-center justify-center text-center px-4">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative z-10 max-w-4xl mx-auto animate-fade-in-up">
+                <h1 class="font-serif text-4xl md:text-6xl text-white font-bold mb-6 leading-tight drop-shadow-md">
+                    Authentic Safaris. <br/>Grounded Insights. <br/><span class="text-bush-gold">Local Expertise.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-stone-100 mb-8 max-w-2xl mx-auto font-light">
+                    From unforgettable wildlife journeys to professional translation, data collection, and localisation services across East Africa.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="router.navigate('safaris')" class="bg-bush-gold hover:bg-amber-600 text-white px-8 py-3.5 rounded-md font-semibold text-lg transition shadow-lg">
+                        Explore Safaris
+                    </button>
+                    <button onclick="router.navigate('services')" class="bg-transparent border-2 border-white hover:bg-white hover:text-bush-green text-white px-8 py-3.5 rounded-md font-semibold text-lg transition backdrop-blur-sm">
+                        Research Services
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Pillars -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-bush-gold font-bold uppercase tracking-wider text-sm">What We Do</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-bush-green mt-2 font-bold">Bridging Adventure & Insight</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Pillar 1 -->
+                    <div class="group bg-stone-50 rounded-xl p-8 hover:shadow-xl transition-all border border-stone-100 hover:border-bush-gold/30 cursor-pointer" onclick="router.navigate('safaris')">
+                        <div class="w-14 h-14 bg-bush-green/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-bush-green group-hover:text-white transition-colors text-bush-green">
+                            <i data-lucide="compass" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-bush-dark">Safari Experiences</h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">Thoughtfully curated wildlife, cultural, and landscape journeys led by local experts who know the land intimately.</p>
+                        <span class="text-bush-green font-medium flex items-center gap-1 group-hover:gap-2 transition-all">View Packages <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="group bg-stone-50 rounded-xl p-8 hover:shadow-xl transition-all border border-stone-100 hover:border-bush-gold/30 cursor-pointer" onclick="router.navigate('services')">
+                        <div class="w-14 h-14 bg-blue-900/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-colors text-blue-900">
+                            <i data-lucide="languages" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-bush-dark">Translation & Localisation</h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">Accurate, culturally grounded language services for NGOs and businesses. We speak the language of the community.</p>
+                        <span class="text-blue-900 font-medium flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="group bg-stone-50 rounded-xl p-8 hover:shadow-xl transition-all border border-stone-100 hover:border-bush-gold/30 cursor-pointer" onclick="router.navigate('services')">
+                        <div class="w-14 h-14 bg-teal-700/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-teal-700 group-hover:text-white transition-colors text-teal-700">
+                            <i data-lucide="clipboard-list" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-bush-dark">Data Collection</h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">Reliable, ethical field data collection for research institutions. Quantitative and qualitative methodologies.</p>
+                        <span class="text-teal-700 font-medium flex items-center gap-1 group-hover:gap-2 transition-all">Our Methods <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Signals -->
+        <section class="py-12 border-y border-stone-200 bg-bush-light">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <p class="text-stone-500 text-sm font-semibold uppercase tracking-widest mb-8">Trusted by Travelers & Institutions</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <!-- Placeholders for logos -->
+                    <div class="flex items-center justify-center font-bold text-xl text-stone-400">UN HABITAT</div>
+                    <div class="flex items-center justify-center font-bold text-xl text-stone-400">AMREF</div>
+                    <div class="flex items-center justify-center font-bold text-xl text-stone-400">TripAdvisor 5.0</div>
+                    <div class="flex items-center justify-center font-bold text-xl text-stone-400">KWS Partner</div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- 2. SAFARIS LIST VIEW -->
+    <template id="view-safaris">
+        <div class="bg-stone-50 py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h1 class="font-serif text-4xl md:text-5xl text-bush-green font-bold mb-6">Our Safari Packages</h1>
+                    <p class="text-lg text-stone-600">Experience the raw beauty of East Africa. From the rolling plains of the Mara to the cultural heartlands, our packages are crafted for immersion and authenticity.</p>
+                </div>
+
+                <!-- Filters (Visual only for now) -->
+                <div class="flex flex-wrap justify-center gap-2 mb-12">
+                    <button class="px-4 py-2 bg-bush-green text-white rounded-full text-sm font-medium">All Safaris</button>
+                    <button class="px-4 py-2 bg-white border border-stone-200 text-stone-600 hover:border-bush-green hover:text-bush-green rounded-full text-sm font-medium transition">Wildlife</button>
+                    <button class="px-4 py-2 bg-white border border-stone-200 text-stone-600 hover:border-bush-green hover:text-bush-green rounded-full text-sm font-medium transition">Cultural</button>
+                    <button class="px-4 py-2 bg-white border border-stone-200 text-stone-600 hover:border-bush-green hover:text-bush-green rounded-full text-sm font-medium transition">Budget</button>
+                </div>
+
+                <!-- Package Grid (Populated by JS) -->
+                <div id="safari-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- JS Injects cards here -->
+                </div>
+
+                <!-- Custom Safari CTA -->
+                <div class="mt-20 bg-bush-green rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-serif text-3xl font-bold mb-4">Want something unique?</h3>
+                        <p class="mb-8 max-w-2xl mx-auto text-stone-200">We specialize in bespoke itineraries. Tell us your dates, budget, and interests, and we'll build your dream safari.</p>
+                        <button onclick="router.navigate('custom')" class="bg-bush-gold hover:bg-amber-600 text-white px-8 py-3 rounded-md font-semibold transition inline-flex items-center gap-2">
+                            Build Your Safari <i data-lucide="wrench" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 3. SAFARI DETAIL VIEW (Dynamic) -->
+    <template id="view-safari-detail">
+        <div id="safari-detail-content" class="bg-white min-h-screen pb-20">
+            <!-- Content injected via JS -->
+        </div>
+    </template>
+
+    <!-- 4. PROFESSIONAL SERVICES VIEW -->
+    <template id="view-services">
+        <div class="bg-white">
+            <!-- Header -->
+            <div class="bg-slate-900 text-white py-20 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20 service-pattern"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <span class="text-bush-gold font-bold tracking-widest uppercase text-sm mb-2 block">Professional Services</span>
+                    <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">Research Support & Field Services</h1>
+                    <p class="text-xl text-slate-300 max-w-3xl">We provide logistical, linguistic, and data support for international researchers, NGOs, and development agencies operating in East Africa.</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="sticky top-20 z-40 bg-white border-b border-stone-200 shadow-sm">
+                <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
+                    <div class="flex space-x-8 min-w-max">
+                        <a href="#translation" class="py-4 border-b-2 border-bush-gold text-bush-dark font-medium">Translation</a>
+                        <a href="#data" class="py-4 border-b-2 border-transparent hover:border-stone-300 text-stone-500 font-medium">Data Collection</a>
+                        <a href="#localisation" class="py-4 border-b-2 border-transparent hover:border-stone-300 text-stone-500 font-medium">Localisation</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+                
+                <!-- Translation -->
+                <div id="translation" class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-block p-3 bg-blue-100 text-blue-800 rounded-lg mb-6"><i data-lucide="languages" class="w-6 h-6"></i></div>
+                        <h2 class="font-serif text-3xl font-bold text-slate-900 mb-4">Professional Translation</h2>
+                        <p class="text-stone-600 mb-6 leading-relaxed">We don't just translate words; we translate meaning. Our team of native speakers ensures your message resonates with local communities while maintaining technical accuracy.</p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5 mt-0.5"></i> <span>Languages: English, Swahili, Kikuyu, Luo, Kamba, Maasai.</span></li>
+                            <li class="flex items-start gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5 mt-0.5"></i> <span>Documents: Surveys, Informed Consent, Legal, Educational Materials.</span></li>
+                            <li class="flex items-start gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5 mt-0.5"></i> <span>Double-blind back-translation quality assurance.</span></li>
+                        </ul>
+                        <button onclick="scrollToContact('Translation')" class="text-blue-900 font-semibold border-b-2 border-blue-900 hover:text-blue-700 transition">Request Translation Rate Card</button>
+                    </div>
+                    <div class="bg-stone-100 p-2 rounded-xl transform rotate-1">
+                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1000" alt="Translation work" class="rounded-lg shadow-lg w-full h-80 object-cover">
+                    </div>
+                </div>
+
+                <!-- Data Collection -->
+                <div id="data" class="grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
+                    <div class="order-2 md:order-1 bg-stone-100 p-2 rounded-xl transform -rotate-1">
+                        <img src="https://images.unsplash.com/photo-1576089235406-dbbf14859a56?auto=format&fit=crop&q=80&w=1000" alt="Field research" class="rounded-lg shadow-lg w-full h-80 object-cover">
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="inline-block p-3 bg-teal-100 text-teal-800 rounded-lg mb-6"><i data-lucide="database" class="w-6 h-6"></i></div>
+                        <h2 class="font-serif text-3xl font-bold text-slate-900 mb-4">Field Data Collection</h2>
+                        <p class="text-stone-600 mb-6 leading-relaxed">End-to-end data collection services. We recruit, train, and deploy enumerators to hard-to-reach areas, ensuring high-quality data for your study.</p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5 mt-0.5"></i> <span>Methods: ODK/Kobo Surveys, Focus Group Discussions (FGDs), Key Informant Interviews.</span></li>
+                            <li class="flex items-start gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5 mt-0.5"></i> <span>Sectors: Health, Agriculture, Governance, Climate Change.</span></li>
+                            <li class="flex items-start gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5 mt-0.5"></i> <span>Strict adherence to ethical standards and IRB protocols.</span></li>
+                        </ul>
+                        <button onclick="scrollToContact('Data Collection')" class="text-teal-900 font-semibold border-b-2 border-teal-900 hover:text-teal-700 transition">Discuss Your Research Needs</button>
+                    </div>
+                </div>
+
+                 <!-- Localisation -->
+                 <div id="localisation" class="bg-stone-50 rounded-2xl p-8 md:p-12 text-center">
+                    <div class="inline-block p-3 bg-orange-100 text-orange-800 rounded-lg mb-4"><i data-lucide="map" class="w-6 h-6"></i></div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900 mb-4">Contextual Localisation</h2>
+                    <p class="text-stone-600 max-w-2xl mx-auto mb-8">Adapt your product, app, or campaign for the East African market. We look beyond language to cultural nuances, ensuring your project lands effectively.</p>
+                    <button onclick="scrollToContact('Localisation')" class="bg-slate-900 text-white px-8 py-3 rounded-md hover:bg-slate-800 transition">Start a Localisation Project</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 5. CONTACT / FORM VIEW -->
+    <template id="view-contact">
+        <div class="bg-bush-light min-h-screen py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-bush-green p-8 text-center">
+                        <h1 class="text-3xl font-serif font-bold text-white mb-2">Get in Touch</h1>
+                        <p class="text-green-100">Tell us how we can help you today.</p>
+                    </div>
+                    <div class="p-8 md:p-12">
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-stone-700 mb-1">Name</label>
+                                    <input type="text" required class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-bush-green focus:border-transparent outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-stone-700 mb-1">Email</label>
+                                    <input type="email" required class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-bush-green focus:border-transparent outline-none transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-stone-700 mb-1">I am interested in...</label>
+                                <select id="contact-category" class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-bush-green focus:border-transparent outline-none transition bg-white">
+                                    <option value="Safari">Booking a Safari</option>
+                                    <option value="Custom">Custom Safari Planning</option>
+                                    <option value="Translation">Translation Services</option>
+                                    <option value="Data">Data Collection / Research</option>
+                                    <option value="Other">General Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-stone-700 mb-1">Message</label>
+                                <textarea rows="4" required class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-bush-green focus:border-transparent outline-none transition"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-bush-gold hover:bg-amber-600 text-white font-bold py-3 rounded-md transition shadow-md">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+     <!-- 6. WHERE WE WORK (Map Placeholder) -->
+     <template id="view-about">
+        <div class="bg-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                    <div>
+                        <h1 class="font-serif text-4xl font-bold text-bush-green mb-6">About Bush Bunny</h1>
+                        <p class="text-stone-600 mb-4 leading-relaxed">Founded in 2018, Bush Bunny started with a simple premise: local knowledge is the key to both authentic travel and accurate research.</p>
+                        <p class="text-stone-600 mb-6 leading-relaxed">Whether guiding a family through the Maasai Mara or leading a focus group in a remote village, our approach is the same: respect, precision, and deep engagement.</p>
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div class="border-l-4 border-bush-gold pl-4">
+                                <span class="block text-2xl font-bold text-bush-dark">6+</span>
+                                <span class="text-sm text-stone-500">Years Experience</span>
+                            </div>
+                            <div class="border-l-4 border-bush-gold pl-4">
+                                <span class="block text-2xl font-bold text-bush-dark">200+</span>
+                                <span class="text-sm text-stone-500">Safaris Conducted</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80&w=1000" class="rounded-lg shadow-xl w-full" alt="Team in the field">
+                    </div>
+                </div>
+
+                <!-- Where We Work -->
+                <div class="bg-stone-50 rounded-2xl p-8 border border-stone-200">
+                    <h2 class="font-serif text-3xl font-bold text-center mb-8">Where We Work</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="font-bold text-xl mb-4 text-bush-green">Kenya Coverage</h3>
+                            <ul class="space-y-2 text-stone-600">
+                                <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-bush-gold"></i> Nairobi (HQ)</li>
+                                <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-bush-gold"></i> Rift Valley</li>
+                                <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-bush-gold"></i> Coastal Region</li>
+                                <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-bush-gold"></i> Northern Kenya</li>
+                            </ul>
+                        </div>
+                         <!-- Abstract Map Visual -->
+                         <div class="h-64 bg-stone-200 rounded-lg flex items-center justify-center relative overflow-hidden">
+                             <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #ccc 0, #ccc 1px, transparent 0, transparent 50%); background-size: 10px 10px;"></div>
+                             <p class="text-stone-500 font-bold z-10">Interactive Coverage Map Loading...</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // --- DATA STORE ---
+        const packages = [
+            {
+                id: 'living-mara',
+                title: 'The Living Mara',
+                days: 6,
+                price: '$1,800',
+                image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=1000',
+                tags: ['Wildlife', 'Popular'],
+                description: 'Witness the Great Migration and the Big Five in Kenya\'s most famous reserve. A balance of luxury and raw nature.',
+                itinerary: [
+                    { day: 1, title: 'Arrival & Transfer to Mara', desc: 'Depart Nairobi, drive through the Rift Valley viewpoint. Evening game drive.' },
+                    { day: 2, title: 'Full Day Game Drive', desc: 'Picnic lunch by the Mara River. Look for hippos, crocodiles, and lions.' },
+                    { day: 3, title: 'Walking Safari & Culture', desc: 'Morning bush walk with Maasai guides followed by a village visit.' },
+                    { day: 4, title: 'Hot Air Balloon (Optional)', desc: 'Sunrise balloon safari followed by champagne breakfast. Afternoon relaxation.' },
+                    { day: 5, title: 'Conservancy Drive', desc: 'Visit a private conservancy for a night game drive experience.' },
+                    { day: 6, title: 'Return to Nairobi', desc: 'Morning game drive, flight or drive back to Nairobi.' }
+                ],
+                included: ['4x4 Land Cruiser', 'Park Fees', 'Full Board Accommodation', 'Professional Guide'],
+                excluded: ['International Flights', 'Tips', 'Alcoholic Drinks']
+            },
+            {
+                id: 'rift-valley',
+                title: 'Rift Valley & Lakes',
+                days: 5,
+                price: '$1,450',
+                image: 'https://images.unsplash.com/photo-1544979590-2799616a2c27?auto=format&fit=crop&q=80&w=1000',
+                tags: ['Scenic', 'Birding'],
+                description: 'Explore the shimmering lakes of Naivasha and Nakuru. Perfect for bird watchers and rhino enthusiasts.',
+                itinerary: [
+                    { day: 1, title: 'Nairobi to Lake Naivasha', desc: 'Boat ride on Lake Naivasha to see hippos and fish eagles.' },
+                    { day: 2, title: 'Hell\'s Gate National Park', desc: 'Cycling safari among zebras and giraffes. Hike the gorge.' },
+                    { day: 3, title: 'Lake Nakuru', desc: 'Transfer to Nakuru. Afternoon game drive to see Rhinos.' },
+                    { day: 4, title: 'Flamingos & Falls', desc: 'Morning bird watching. Visit Thompson Falls.' },
+                    { day: 5, title: 'Return to Nairobi', desc: 'Leisurely breakfast and drive back.' }
+                ],
+                included: ['Transport', 'Park Fees', 'Accommodation', 'Boat Ride'],
+                excluded: ['Tips', 'Personal items']
+            },
+             {
+                id: 'cultural-community',
+                title: 'Cultural Immersion',
+                days: 4,
+                price: '$950',
+                image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=1000',
+                tags: ['Culture', 'Community'],
+                description: 'Go beyond the jeep. Stay with local communities, learn traditional skills, and understand the human side of Kenya.',
+                itinerary: [
+                    { day: 1, title: 'Arrival in Loita Hills', desc: 'Welcome ceremony by the community elders.' },
+                    { day: 2, title: 'Forest Trek', desc: 'Learn about medicinal plants and tracking skills.' },
+                    { day: 3, title: 'Beading & Storytelling', desc: 'Work with women groups and evening fireside stories.' },
+                    { day: 4, title: 'Farewell', desc: 'Plant a tree and depart.' }
+                ],
+                included: ['Community Fees', 'Homestay/Camp', 'Meals', 'Translator'],
+                excluded: ['Luxury amenities', 'Private transfers']
+            }
+        ];
+
+        // --- ROUTER & APP LOGIC ---
+
+        const router = {
+            navigate: (pageId, param = null) => {
+                const app = document.getElementById('app-container');
+                const template = document.getElementById(`view-${pageId}`) || document.getElementById('view-home');
+                
+                // Clear current content
+                app.innerHTML = '';
+                
+                // Clone template content
+                const content = template.content.cloneNode(true);
+                app.appendChild(content);
+
+                // Handle specific page logic
+                if (pageId === 'safaris') renderSafariGrid();
+                if (pageId === 'safari-detail' && param) renderSafariDetail(param);
+                if (pageId === 'contact' && param) {
+                    setTimeout(() => {
+                        const select = document.getElementById('contact-category');
+                        if(select) select.value = param;
+                    }, 100);
+                }
+
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Re-initialize icons
+                lucide.createIcons();
+            }
+        };
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderSafariGrid() {
+            const grid = document.getElementById('safari-grid');
+            if(!grid) return;
+
+            grid.innerHTML = packages.map(pkg => `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow group flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${pkg.image}" alt="${pkg.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-bush-green uppercase tracking-wide">
+                            ${pkg.days} Days
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex gap-2 mb-3">
+                            ${pkg.tags.map(tag => `<span class="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded">${tag}</span>`).join('')}
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-bush-dark mb-2">${pkg.title}</h3>
+                        <p class="text-stone-600 text-sm mb-4 line-clamp-3">${pkg.description}</p>
+                        <div class="mt-auto pt-4 border-t border-stone-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-stone-400 block">Starting from</span>
+                                <span class="text-bush-gold font-bold text-lg">${pkg.price}</span>
+                            </div>
+                            <button onclick="router.navigate('safari-detail', '${pkg.id}')" class="text-bush-green font-medium hover:text-green-700 text-sm flex items-center gap-1">
+                                View Itinerary <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSafariDetail(id) {
+            const container = document.getElementById('safari-detail-content');
+            const pkg = packages.find(p => p.id === id);
+            
+            if (!pkg) {
+                router.navigate('safaris');
+                return;
+            }
+
+            container.innerHTML = `
+                <!-- Hero Image -->
+                <div class="h-[60vh] relative">
+                    <img src="${pkg.image}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 text-white">
+                        <div class="max-w-7xl mx-auto">
+                            <span class="bg-bush-gold px-3 py-1 rounded text-xs font-bold uppercase mb-4 inline-block">${pkg.days} Days Adventure</span>
+                            <h1 class="font-serif text-4xl md:text-6xl font-bold mb-4">${pkg.title}</h1>
+                            <p class="text-xl opacity-90 max-w-2xl">${pkg.description}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div class="grid lg:grid-cols-3 gap-12">
+                        <!-- Left Content -->
+                        <div class="lg:col-span-2">
+                            <h2 class="font-serif text-2xl font-bold text-bush-dark mb-6">Daily Itinerary</h2>
+                            <div class="space-y-8 border-l-2 border-stone-200 ml-3 pl-8 relative">
+                                ${pkg.itinerary.map((day, index) => `
+                                    <div class="relative">
+                                        <span class="absolute -left-[41px] bg-bush-green text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mt-1">${day.day}</span>
+                                        <h3 class="font-bold text-lg text-stone-800 mb-2">${day.title}</h3>
+                                        <p class="text-stone-600 leading-relaxed">${day.desc}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-8 mt-12 bg-stone-50 p-6 rounded-xl">
+                                <div>
+                                    <h4 class="font-bold text-bush-green mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i> Included</h4>
+                                    <ul class="text-sm text-stone-600 space-y-2">
+                                        ${pkg.included.map(item => `<li>• ${item}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-red-800 mb-3 flex items-center gap-2"><i data-lucide="x-circle" class="w-5 h-5"></i> Not Included</h4>
+                                    <ul class="text-sm text-stone-600 space-y-2">
+                                        ${pkg.excluded.map(item => `<li>• ${item}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar Sticky -->
+                        <div class="lg:col-span-1">
+                            <div class="sticky top-24 bg-white shadow-lg border border-stone-100 rounded-xl p-6">
+                                <div class="mb-6 pb-6 border-b border-stone-100">
+                                    <span class="text-stone-500 text-sm">Price per person</span>
+                                    <div class="text-3xl font-bold text-bush-green">${pkg.price}</div>
+                                </div>
+                                <div class="space-y-4 mb-8">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-stone-500">Duration</span>
+                                        <span class="font-medium">${pkg.days} Days / ${pkg.days - 1} Nights</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-stone-500">Start/End</span>
+                                        <span class="font-medium">Nairobi</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <button onclick="router.navigate('contact', 'Safari: ${pkg.title}')" class="w-full bg-bush-gold hover:bg-amber-600 text-white font-bold py-3 rounded transition">Enquire Now</button>
+                                    <a href="https://wa.me/254700000000?text=Hi, I am interested in ${pkg.title}" target="_blank" class="w-full border-2 border-green-500 text-green-600 hover:bg-green-50 font-bold py-3 rounded transition flex items-center justify-center gap-2">
+                                        <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- UTILITIES ---
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function mobileNav(page) {
+            toggleMobileMenu();
+            router.navigate(page);
+        }
+
+        function scrollToContact(category) {
+            router.navigate('contact', category);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            // In a real app, this would send data to a backend
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            btn.innerText = 'Message Sent!';
+            btn.classList.add('bg-green-600');
+            
+            setTimeout(() => {
+                alert('Thank you for your inquiry! A Bush Bunny specialist will contact you shortly.');
+                e.target.reset();
+                btn.innerText = originalText;
+                btn.classList.remove('bg-green-600');
+            }, 500);
+        }
+
+        // --- INITIALIZATION ---
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            // Start at home
+            router.navigate('home');
+            lucide.createIcons();
+        });
+
+    </script>
+</body>
+</html>
